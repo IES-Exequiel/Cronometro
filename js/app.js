@@ -34,7 +34,6 @@ const actualizarDisplay = () => {
 
 const iniciarIntervalo = () => {
     idIntervalo = setInterval( ()=> {
-        console.log("Funcionando");
         funcionesInicio();
     }, 1000)
     intervaloFuncionando = true;
@@ -46,7 +45,6 @@ const iniciarIntervalo = () => {
 
 const detenerIntervalo = () => {
     clearInterval(idIntervalo);
-    console.log("Intervalo detenido");
     intervaloFuncionando = false;
     actualizarBtnReiniciar()
     btnDetener.disabled = true;
