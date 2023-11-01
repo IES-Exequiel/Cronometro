@@ -1,10 +1,10 @@
-let segundos = 0;
-let minutos = 0;
-let horas = 0;
+let tiempo = {
+    horas: 0,
+    minutos: 0,
+    segundos: 0
+};
 
-let spanSegundos = document.getElementById("displaySegundos");
-let spanMinutos = document.getElementById("displayMinutos");
-let spanHoras = document.getElementById("displayHoras");
+let displayTiempo = document.getElementById("displayTiempo");
 
 let btnIniciar = document.getElementById("btnIniciar");
 let btnLap = document.getElementById("btnLap");
@@ -17,21 +17,19 @@ let idIntervalo;
 let intervaloFuncionando = false;
 
 const displayCronometro = () => {
-        segundos+=1;
-        if(segundos == 60){
-            segundos = 0;
-            minutos++;
-            if(minutos == 60){
-                minutos = 0;
-                horas++;
+        tiempo.segundos+=1;
+        if(tiempo.segundos == 60){
+            tiempo.segundos = 0;
+            tiempo.minutos++;
+            if(tiempo.minutos == 60){
+                tiempo.minutos = 0;
+                tiempo.horas++;
             }
         }
     };
 
-const aplicarCambios = () => {
-    spanSegundos.innerText = segundos;
-    spanMinutos.innerText = minutos;
-    spanHoras.innerText = horas;
+const actualizarDisplay = () => {
+    displayTiempo.innerText = `${tiempo.horas}:${tiempo.minutos}:${tiempo.segundos}`;
 };
 
 const iniciarIntervalo = () => {
@@ -58,12 +56,12 @@ const detenerIntervalo = () => {
 
 const funcionesInicio = () => {
     displayCronometro();
-    aplicarCambios();
+    actualizarDisplay();
 }
 
 const lapTiempo = () => {
     const tiempoLapeado = document.createElement("li");
-    tiempoLapeado.textContent = `${horas}:${minutos}:${segundos}`;
+    tiempoLapeado.textContent = `${tiempo.horas}:${tiempo.minutos}:${tiempo.segundos}`;
     listaUl.appendChild(tiempoLapeado);
 }
 
@@ -78,10 +76,10 @@ const actualizarBtnReiniciar = () => {
 }
 
 const limpiarDisplay = () => {
-    segundos = 0;
-    minutos = 0;
-    horas = 0;
-    aplicarCambios();
+    tiempo.segundos = 0;
+    tiempo.minutos = 0;
+    tiempo.horas = 0;
+    actualizarDisplay();
     btnReiniciar.disabled = intervaloFuncionando;
     btnReiniciar.style.visibility = "hidden";
 }
